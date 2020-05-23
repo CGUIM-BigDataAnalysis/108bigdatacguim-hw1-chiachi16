@@ -34,8 +34,7 @@ table1<-table1[order(table1$大學薪資比率,decreasing = T),]
 head(table1[table1$大學薪資比率>1,"大職業別"],10)
 #第二小題
 temp<-table1[table1$大學薪資比率>1.05,"大職業別"]
-temp<-c(temp)
-temp[!is.na(temp)]
+temp[!is.na(temp),]
 #種類
 Q1<-table1[table1$大學薪資比率>1.05,"大職業別"]
 Q1<-c(Q1)
@@ -46,8 +45,8 @@ get_job<-function(x){
 Q1<-map(c(1:53),get_job)%>%as.matrix()
 Q1_2<-unlist(Q1)%>%table()
 #主要職業別
-Q1_2[order(Q1_2,decreasing = T)]%>%as.data.frame()
-
+Q1[order(Q1_2,decreasing = T),]%>%as.matrix()
+?knitr::kable
 #第二題
 #第一小題
 Q2_104<-data.frame(table1$大職業別,table1$`大學女/男.104`)
@@ -82,6 +81,6 @@ Q4<-Q4[grep("醫療保健業-*",Q4$table1.大職業別),]
 colnames(Q4)<-c("大職業別","大學薪資","研究所薪資")
 Q4$研究所薪資<-gsub("—|…",0,Q4$研究所薪資)%>%as.numeric()
 Q4$大學薪資<-gsub("—|…",0,Q4$大學薪資)%>%as.numeric()
-Q4$薪資差異<-Q4$研究所薪資-Q4$大學薪資%>%as.numeric()
-Q4[!Q4$薪資差異<0,]
+Q4$薪資差異<-Q4$研究所薪資-Q4$大學薪資
+
 

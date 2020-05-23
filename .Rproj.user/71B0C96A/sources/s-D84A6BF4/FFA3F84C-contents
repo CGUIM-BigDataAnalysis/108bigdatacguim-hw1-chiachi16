@@ -5,7 +5,9 @@ library(readr)
 # 讀檔案
 
 X107_1 <- read_csv("C:/Users/user/Downloads/A17000000J-020066-Qod/107_1.csv")
+View(X107_1)
 X104_1 <- read_csv("C:/Users/user/Downloads/104_2.csv")
+View(X104_1)
 
 # 整理資料
 X104_1$大職業別<-gsub("、","_",X104_1$大職業別)
@@ -13,9 +15,7 @@ X104_1$大職業別<-gsub("部門","",X104_1$大職業別)
 X104_1$大職業別<-gsub("營造業","營建工程",X104_1$大職業別)
 X104_1$大職業別<-gsub("資訊及通訊傳播業","出版、影音製作、傳播及資通訊服務業",X104_1$大職業別)
 X104_1$大職業別<-gsub("教育服務業","教育業",X104_1$大職業別)
-
 X104_1$大職業別<-gsub("醫療保健服務業","醫療保健業",X104_1$大職業別)
-test<-which(X104_1$`經常性薪資-女/男`=="…")
 #合併104&107年資料
 table1<-full_join(X104_1,X107_1,by="大職業別")
 #新增欄位大學薪資比率
@@ -31,22 +31,20 @@ table1$大學薪資.104<-as.numeric(table1$大學薪資.104)
 table1$大學薪資比率<-table1$大學薪資.107/table1$大學薪資.104
 table1<-table1[order(table1$大學薪資比率,decreasing = T),]
 #第一小題
+##table1[table1$大職業別,]
 head(table1[table1$大學薪資比率>1,"大職業別"],10)
 #第二小題
-temp<-table1[table1$大學薪資比率>1.05,"大職業別"]
-temp<-c(temp)
-temp[!is.na(temp)]
-#種類
 Q1<-table1[table1$大學薪資比率>1.05,"大職業別"]
 Q1<-c(Q1)
 Q1<-strsplit(Q1$大職業別,"-")
+Q1[[]][1]
 get_job<-function(x){
   return(Q1[[x]][1])
 }
 Q1<-map(c(1:53),get_job)%>%as.matrix()
 Q1_2<-unlist(Q1)%>%table()
 #主要職業別
-Q1_2[order(Q1_2,decreasing = T)]%>%as.data.frame()
+Q1<-Q1[order(Q1_2,decreasing = T),]
 
 #第二題
 #第一小題
@@ -56,7 +54,7 @@ Q2_107<-data.frame(table1$大職業別,table1$`大學女/男.107`)
 colnames(Q2_107)<-c("大職業別","大學女/男.107")
 Q2_104$`大學女/男.104`<-gsub("—|…",0,Q2_104$`大學女/男.104`)
 Q2_107$`大學女/男.107`<-gsub("—|…",0,Q2_107$`大學女/男.107`)
-Q2_104$`大學女/男.104`<-as.numeric(Q2_104$`大學女/男.104`)
+Q2_104$`大學女/男.104`<-as.numeric(Q2_104$`大學女/男.104`)which(Q2_104$`大學女/男.104`!=0)
 Q2_107$`大學女/男.107`<-as.numeric(Q2_107$`大學女/男.107`)
 Q2_104<-Q2_104[order(Q2_104$`大學女/男.104`,decreasing = F),]
 Q2_107<-Q2_107[order(Q2_107$`大學女/男.107`,decreasing = F),]
@@ -82,6 +80,6 @@ Q4<-Q4[grep("醫療保健業-*",Q4$table1.大職業別),]
 colnames(Q4)<-c("大職業別","大學薪資","研究所薪資")
 Q4$研究所薪資<-gsub("—|…",0,Q4$研究所薪資)%>%as.numeric()
 Q4$大學薪資<-gsub("—|…",0,Q4$大學薪資)%>%as.numeric()
-Q4$薪資差異<-Q4$研究所薪資-Q4$大學薪資%>%as.numeric()
-Q4[!Q4$薪資差異<0,]
+Q4$薪資差異<-Q4$研究所薪資-Q4$大學薪資
+
 

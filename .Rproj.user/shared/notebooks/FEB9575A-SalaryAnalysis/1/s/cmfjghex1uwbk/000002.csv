@@ -1,0 +1,67 @@
+"0","library(readr)"
+"0","library(dplyr)"
+"2","Registered S3 method overwritten by 'dplyr':
+  method           from
+  print.rowwise_df     
+"
+"2","
+Attaching package: ¡¥dplyr¡¦
+
+"
+"2","The following objects are masked from ¡¥package:stats¡¦:
+
+    filter, lag
+
+"
+"2","The following objects are masked from ¡¥package:base¡¦:
+
+    intersect, setdiff, setequal, union
+
+"
+"0","X104_1 <- read_csv(""C:/Users/user/Downloads/104_2.csv"")"
+"2","Parsed with column specification:
+cols(
+  ¦~«× = [32mcol_double()[39m,
+  ¤jÂ¾·~§O = [31mcol_character()[39m,
+  `¸g±`©ÊÁ~¸ê-Á~¸ê` = [32mcol_double()[39m,
+  `¸g±`©ÊÁ~¸ê-¤k/¨k` = [31mcol_character()[39m,
+  `°ê¤¤¤Î¥H¤U-Á~¸ê` = [31mcol_character()[39m,
+  `°ê¤¤¤Î¥H¤U-¤k/¨k` = [31mcol_character()[39m,
+  `°ª¤¤©Î°ªÂ¾-Á~¸ê` = [31mcol_character()[39m,
+  `°ª¤¤©Î°ªÂ¾-¤k/¨k` = [31mcol_character()[39m,
+  `±M¬ì-Á~¸ê` = [31mcol_character()[39m,
+  `±M¬ì-¤k/¨k` = [31mcol_character()[39m,
+  `¤j¾Ç-Á~¸ê` = [31mcol_character()[39m,
+  `¤j¾Ç-¤k/¨k` = [31mcol_character()[39m,
+  `¬ã¨s©Ò¤Î¥H¤W-Á~¸ê` = [31mcol_character()[39m,
+  `¬ã¨s©Ò¤Î¥H¤W-¤k/¨k` = [31mcol_character()[39m
+)
+"
+"0","X107_1 <- read_csv(""C:/Users/user/Downloads/A17000000J-020066-Qod/107_1.csv"")"
+"2","Parsed with column specification:
+cols(
+  ¦~«× = [32mcol_double()[39m,
+  ¤jÂ¾·~§O = [31mcol_character()[39m,
+  `¸g±`©ÊÁ~¸ê-Á~¸ê` = [31mcol_character()[39m,
+  `¸g±`©ÊÁ~¸ê-¤k/¨k` = [31mcol_character()[39m,
+  `°ê¤¤¤Î¥H¤U-Á~¸ê` = [31mcol_character()[39m,
+  `°ê¤¤¤Î¥H¤U-¤k/¨k` = [31mcol_character()[39m,
+  `°ª¤¤©Î°ªÂ¾-Á~¸ê` = [31mcol_character()[39m,
+  `°ª¤¤©Î°ªÂ¾-¤k/¨k` = [31mcol_character()[39m,
+  `±M¬ì-Á~¸ê` = [31mcol_character()[39m,
+  `±M¬ì-¤k/¨k` = [31mcol_character()[39m,
+  `¤j¾Ç-Á~¸ê` = [31mcol_character()[39m,
+  `¤j¾Ç-¤k/¨k` = [31mcol_character()[39m,
+  `¬ã¨s©Ò-Á~¸ê` = [31mcol_character()[39m,
+  `¬ã¨s©Ò-¤k/¨k` = [31mcol_character()[39m
+)
+"
+"0","X104_1$å¤§è·æ¥­åˆ¥<-gsub(""ã€"",""_"",X104_1$å¤§è·æ¥­åˆ¥)"
+"0","X104_1$å¤§è·æ¥­åˆ¥<-gsub(""éƒ¨é–€"","""",X104_1$å¤§è·æ¥­åˆ¥)"
+"0","X104_1$å¤§è·æ¥­åˆ¥<-gsub(""ç‡Ÿé€ æ¥­"",""ç‡Ÿå»ºå·¥ç¨‹"",X104_1$å¤§è·æ¥­åˆ¥)"
+"0","X104_1$å¤§è·æ¥­åˆ¥<-gsub(""è³‡è¨ŠåŠé€šè¨Šå‚³æ’­æ¥­"",""å‡ºç‰ˆã€å½±éŸ³è£½ä½œã€å‚³æ’­åŠè³‡é€šè¨Šæœå‹™æ¥­"",X104_1$å¤§è·æ¥­åˆ¥)"
+"0","X104_1$å¤§è·æ¥­åˆ¥<-gsub(""æ•™è‚²æœå‹™æ¥­"",""æ•™è‚²æ¥­"",X104_1$å¤§è·æ¥­åˆ¥)"
+"0","X104_1$å¤§è·æ¥­åˆ¥<-gsub(""é†«ç™‚ä¿å¥æœå‹™æ¥­"",""é†«ç™‚ä¿å¥æ¥­"",X104_1$å¤§è·æ¥­åˆ¥)"
+"0","test<-which(X104_1$`ç¶“å¸¸æ€§è–ªè³‡-å¥³/ç”·`==""â€¦"")"
+"0","#åˆä½µ104&107å¹´è³‡æ–™"
+"0","table1<-full_join(X104_1,X107_1,by=""å¤§è·æ¥­åˆ¥"")"
